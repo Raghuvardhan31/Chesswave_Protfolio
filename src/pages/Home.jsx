@@ -44,6 +44,39 @@ function Home() {
         </div>
         <p className="stats-tagline">Turn Your Website Into a Digital Growth Engine</p>
       </section>
+
+      {/* Services Preview */}
+      <section className="services-preview">
+        <h2>Our Services</h2>
+        <div className="services-grid">
+          <div className="service-item">
+            <h3>Web Development</h3>
+            <p>Modern, responsive websites built with the latest technologies for schools, colleges, and businesses.</p>
+          </div>
+          <div className="service-item">
+            <h3>Design & UI/UX</h3>
+            <p>Stunning designs that captivate your audience and provide an exceptional user experience.</p>
+          </div>
+          <div className="service-item">
+            <h3>Maintenance & Support</h3>
+            <p>Ongoing support and maintenance to keep your website secure, updated, and performing optimally.</p>
+          </div>
+        </div>
+      </section>
+
+      {/* Pricing Highlight */}
+      <section className="pricing-highlight">
+        <h2>Pricing </h2>
+        <p>Standard | Professional | Premium</p>
+        <p>Starting from ₹20,000</p>
+        <button className="btn-primary">View Plans</button>
+      </section>
+
+      {/* Call to Action */}
+      <section className="call-to-action">
+        <h2>Want a professional website for your institution?</h2>
+        <p>Get a free consultation today</p>
+      </section>
     </div>
   );
 }
