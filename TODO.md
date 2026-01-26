@@ -18,9 +18,11 @@
 - Logos: Used specific URLs provided by user
 - UI Improvements: Added slide-in animations, pulse effects, badges, and secondary buttons
 - Navigation: "Get In Touch" button redirects to contact page
+- Pricing Modal: Added modal popup for website plans when "View Plans" button is clicked
 
 ## Notes
-- Projects: 
+- Projects:
   - Ramaraju Chess Academy: Academy website for personal use
   - ChessWave: Free online chess puzzles practice platform
 - Styling should match the premium design of Home page
+- Pricing Modal: Converted to expandable pricing plans section with "View Plans" button that shows/hides 3 plan boxes
