@@ -18,78 +18,43 @@ export default function Contact() {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData(prevState => ({
-      ...prevState,
+    setFormData({
+      ...formData,
       [name]: value
-    }));
+    });
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
-    if (!formData.institutionName || !formData.contactPerson || !formData.phone || !formData.email || !formData.requirement) {
-      setStatus({
-        submitted: true,
-        type: 'error',
-        message: 'Please fill in all fields.'
-      });
-      setTimeout(() => setStatus(prev => ({ ...prev, submitted: false })), 3000);
-      return;
-    }
-
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailRegex.test(formData.email)) {
-      setStatus({
-        submitted: true,
-        type: 'error',
-        message: 'Please enter a valid email address.'
-      });
-      setTimeout(() => setStatus(prev => ({ ...prev, submitted: false })), 3000);
-      return;
-    }
-
+    setStatus({ submitted: false, type: '', message: '' });
     try {
-      const response = await fetch('https://formspree.io/f/YOUR_FORM_ID', {
+      const response = await fetch('/api/contact', {
         method: 'POST',
         headers: {
-          'Content-Type': 'application/json',
+          'Content-Type': 'application/json'
         },
-        body: JSON.stringify(formData),
-      });
-
+        body: JSON.stringify(formData)
+      }); 
       if (response.ok) {
-        setStatus({
-          submitted: true,
-          type: 'success',
-          message: 'Thank you! We will contact you soon with your free consultation.'
-        });
+        setStatus({ submitted: true, type: 'success', message: 'Thank you for contacting us! We will get back to you shortly.' });
         setFormData({
           institutionName: '',
-          contactPerson: '',
+          contactPerson: '',  
           phone: '',
           email: '',
           requirement: ''
         });
-        setTimeout(() => setStatus(prev => ({ ...prev, submitted: false })), 3000);
-      } else {
-        setStatus({
-          submitted: true,
-          type: 'error',
-          message: 'Failed to send message. Please try again.'
-        });
-        setTimeout(() => setStatus(prev => ({ ...prev, submitted: false })), 3000);
+      }
+      else {
+        const errorData = await response.json();
+        setStatus({ submitted: true, type: 'error', message: errorData.message || 'Something went wrong. Please try again later.' });
       }
     } catch (error) {
-      console.error('Error:', error);
-      setStatus({
-        submitted: true,
-        type: 'error',
-        message: 'An error occurred. Please try again later.'
-      });
-      setTimeout(() => setStatus({ ...status, submitted: false }), 3000);
+      setStatus({ submitted: true, type: 'error', message: 'Network error. Please check your connection and try again.' });
     }
   };
 
+  
   return (
     <div className="contact-container">
       <div className="contact-header">
@@ -98,7 +63,6 @@ export default function Contact() {
       </div>
 
       <div className="contact-content">
-        {/* Left Side - Contact Information */}
         <div className="contact-info">
           <div className="info-card">
             <h2>Get In Touch</h2>
