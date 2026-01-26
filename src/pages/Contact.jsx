@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import './contact.css';
+import './Contact.css';
 
 export default function Contact() {
   const [formData, setFormData] = useState({
@@ -33,7 +33,7 @@ export default function Contact() {
         type: 'error',
         message: 'Please fill in all fields.'
       });
-      setTimeout(() => setStatus({ ...status, submitted: false }), 3000);
+      setTimeout(() => setStatus(prev => ({ ...prev, submitted: false })), 3000);
       return;
     }
 
@@ -44,7 +44,7 @@ export default function Contact() {
         type: 'error',
         message: 'Please enter a valid email address.'
       });
-      setTimeout(() => setStatus({ ...status, submitted: false }), 3000);
+      setTimeout(() => setStatus(prev => ({ ...prev, submitted: false })), 3000);
       return;
     }
 
@@ -70,14 +70,14 @@ export default function Contact() {
           email: '',
           requirement: ''
         });
-        setTimeout(() => setStatus({ ...status, submitted: false }), 3000);
+        setTimeout(() => setStatus(prev => ({ ...prev, submitted: false })), 3000);
       } else {
         setStatus({
           submitted: true,
           type: 'error',
           message: 'Failed to send message. Please try again.'
         });
-        setTimeout(() => setStatus({ ...status, submitted: false }), 3000);
+        setTimeout(() => setStatus(prev => ({ ...prev, submitted: false })), 3000);
       }
     } catch (error) {
       console.error('Error:', error);
